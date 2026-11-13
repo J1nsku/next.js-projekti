@@ -15,7 +15,7 @@ const BucketList = () => {
                 {showForm ? (
                     <NewBucket />
                 ) : (
-                    <button className="bg-green-500" onClick={() => setShowForm(true)}>
+                    <button className="cursor-pointer border rounded-sm p-1" onClick={() => setShowForm(true)}>
                        + Add new bucket
                     </button>
                 )}

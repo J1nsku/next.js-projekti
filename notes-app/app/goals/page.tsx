@@ -1,15 +1,15 @@
 import Link from "next/link"
 import { getGoals } from "../services/goals"
 
-const Goals = () => {
-    const goals = getGoals()
+export default async function Goals() {
+    const goals = await getGoals()
     return (
         <div>
             {/* <h2> Goals </h2> */}
             <div className="flex flex-row gap-4">
                 {goals.map(goal => (
                     <div key={goal.id} className="flex flex-col border rounded-lg p-4">
-                        <img src={goal.url} alt={goal.content}
+                        <img src={goal.image_url} alt={goal.content}
                             width={200}
                             height={200}
                         />
@@ -21,5 +21,3 @@ const Goals = () => {
         </div>
     )
 }
-
-export default Goals
