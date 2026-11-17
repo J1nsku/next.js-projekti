@@ -2,15 +2,8 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import type { Goal } from "../services/goals";
 // import NewGoal from "./NewGoal"
-
-export type Goal = {
-    id: number,
-    content: string,
-    category: string,
-    image_url: string,
-    created_at: string
-}
 
 export default function GoalList({ goals: initialGoals }: { goals: Goal[]; buckets: Record<string, any>[]; }) {
 

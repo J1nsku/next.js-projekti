@@ -10,11 +10,16 @@ const NewGoal = ({ onClose, buckets }: {
 }) => {
 
     const [imageUrl, setImageUrl] = useState<string | null>(null)
+    const [targetDate, setTargetDate] = useState<string | null>(null)
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.[0]) {
             setImageUrl(URL.createObjectURL(e.target.files[0]))
         }
+    }
+
+    const handleTargetDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setTargetDate(e.target.value)
     }
 
     return (
@@ -46,6 +51,15 @@ const NewGoal = ({ onClose, buckets }: {
                             <option value="Food">Food</option>
                             <option value="Other">Other</option> */}
                         </select>
+                    </label>
+                </div>
+                <div>
+                    <label className="border">
+                        Target Date
+                        <input type="date"
+                            name="target_date"
+                            onChange={handleTargetDateChange}
+                        />
                     </label>
                 </div>
                 <div>

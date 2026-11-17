@@ -11,7 +11,7 @@ import { getBuckets } from "./services/buckets";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { redirect } from "next/navigation";
-
+import TopPriorityButton from "./TopPriorityButton";
 
 export default async function HomeContent() {
     await connection()
@@ -55,7 +55,10 @@ export default async function HomeContent() {
                                         width={200}
                                         height={200}
                                     />
+                                    <div className="flex flex-row">
+                                    <TopPriorityButton id={goal.id} is_top_priority={goal.is_top_priority}/>
                                     <h2> {goal.content} </h2>
+                                    </div>
                                     <h3 className="bg-green-100 text-green-950 rounded-full"> {goal.category} </h3>
                                     {new Date(goal.created_at).toLocaleDateString("en-US", {
                                         month: "long",
@@ -67,7 +70,7 @@ export default async function HomeContent() {
                             ))}
                         </div>
                     </div>
-                    <TopPriorities />
+                    <TopPriorities goals={goals.filter((goal) => goal.is_top_priority === true)} />
                 </div>
 
                 <div className="flex flex-col items-stretch mx-auto gap-4 w-full">

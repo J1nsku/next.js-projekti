@@ -3,6 +3,7 @@ import { neon } from "@neondatabase/serverless"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/auth"
 import { error } from "console"
+import { revalidatePath } from "next/cache"
 
 const sql = neon(process.env.DATABASE_URL!)
 
@@ -11,7 +12,9 @@ export type Goal = {
     content: string,
     category: string,
     image_url: string,
-    created_at: string
+    created_at: string,
+    target_date: string | null,
+    is_top_priority: boolean
 }
 
 const goals = [
@@ -39,11 +42,11 @@ export const getGoals = async (): Promise<Goal[]> => {
         throw new Error("User not found")
     }
 
-    const goals = await sql`SELECT * FROM goals WHERE user_id = ${userId}`
+    const goals = await sql`SELECT * FROM goals WHERE user_id = ${userId} ORDER BY created_at ASC`
     return goals as Goal[]
 }
 
-export const addGoal = async (content: string, category: string, image_url: string) => {
+export const addGoal = async (content: string, category: string, image_url: string, targetDate: string | null) => {
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) {
@@ -66,7 +69,6 @@ export const addGoal = async (content: string, category: string, image_url: stri
     WHERE name = ${category}
     AND user_id = ${userId}
     `
-
     const bucketId = buckets[0]?.id
 
     if (!bucketId) {
@@ -74,8 +76,8 @@ export const addGoal = async (content: string, category: string, image_url: stri
     }
 
     return await sql`
-    INSERT INTO goals (content, category, image_url, user_id, bucket_id)
-    VALUES (${content}, ${category}, ${image_url}, ${userId}, ${bucketId})
+    INSERT INTO goals (content, category, image_url, user_id, bucket_id, target_date)
+    VALUES (${content}, ${category}, ${image_url}, ${userId}, ${bucketId}, ${targetDate})
     RETURNING *
     `
 }
@@ -87,4 +89,32 @@ export const getGoalById = (id: number) => {
 
 export const toggleImportance = async (id: number) => {
     const goal = goals.find((goal) => goal.id === id)
+}
+
+export const toggleTopPriority = async (id: number, is_top_priority: boolean) => {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.email) {
+        throw new Error("Not authenticated")
+    }
+
+    const users = await sql`
+    SELECT id FROM users
+    WHERE email = ${session.user.email}
+    `
+
+    const userId = users[0]?.id
+
+    if (!userId) {
+        throw new Error("User not found")
+    }
+
+    await sql`
+  UPDATE goals
+    SET is_top_priority = ${is_top_priority}
+    WHERE id = ${id}
+    AND user_id = ${userId}
+  `
+
+    revalidatePath("/")
 }

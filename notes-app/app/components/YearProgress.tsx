@@ -6,8 +6,14 @@ import { useState } from "react";
 const YearProgress = () => {
 
     return (
-        <div className="font-bold text-lg text-[#9c745f] border border-[#bdbdbd] rounded-lg bg-[#ffffff]">
-            <p> Year Progress </p>
+        <div className="flex flex-col border rounded-lg p-4 gap-4">
+            <h1 className="font-bold text-lg text-[#9c745f] border-b border-[#000000]"> Year Progress </h1>
+            <div className="bg-[#9c745f] text-[#ffffff]">
+                <p>Year:</p>
+                <p>Month:</p>
+                <p>Week:</p>
+                <p>Day:</p>
+            </div>
         </div>
     )
 }
