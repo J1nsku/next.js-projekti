@@ -12,8 +12,8 @@ export type Bucket = {
 const sql = neon(process.env.DATABASE_URL!)
 
 const buckets = [
-    { id: 1, content: 'Travel' },
-    { id: 2, content: 'Adventure' },
+    { id: 1, name: 'Travel' },
+    { id: 2, name: 'Adventure' },
 ]
 
 let nextId = 3
@@ -45,8 +45,27 @@ export const getBuckets = async () => {
     return buckets as Bucket[];
 }
 
-export const addBucket = async (content: string) => {
-    buckets.push({ id: nextId++, content })
+export const addBucket = async (name: string) => {
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user?.email) {
+        throw new Error("Not authenticated")
+    }
+
+    const users = await sql`
+    SELECT id FROM users
+    WHERE email = ${session.user.email}
+    `
+
+    const userId = users[0]?.id
+
+    if (!userId) {
+        throw new Error("User not found")
+    }
+
+
+
+    buckets.push({ id: nextId++, name })
 }
 
 export const getBucketById = async (id: number) => {

@@ -19,13 +19,15 @@ export default function RootLayout({
         <nav>
           <Link href="/">Home</Link>
           {" | "}
-          <Link href="/goals">Goals</Link>
+          {/* <Link href="/goals">Goals</Link>
           {" | "}
           <Link href="/goals/new">Create new</Link>
-          {" | "}
+          {" | "} */}
            <Link href="/login">Login</Link>
            {" | "}
            <Link href="/register">Register</Link>
+           {" | "}
+           <Link href="/logout">Log out</Link>
         </nav>
         {children}
       </body>

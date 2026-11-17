@@ -29,21 +29,6 @@ export default function GoalList({ goals: initialGoals }: { goals: Goal[]; bucke
     // }
 
     return (
-        <div>
-            {/* {goals.map((goal) => (
-                <div key={goal.id}>
-                    <h2> {goal.content} </h2>
-                </div>
-            ))} */}
-            {/* <div>
-                {showForm ? (
-                    <NewGoal />
-                ) : (
-                    <button className="cursor-pointer border rounded-sm p-1" onClick={() => setShowForm(true)}>
-                        + Add new goal
-                    </button>
-                )}
-            </div> */}
-        </div>
+      null
     )
 }

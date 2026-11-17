@@ -2,7 +2,12 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import NewBucket from "../goals/new/bucket/page"
+// import NewBucket from "./NewBucket"
+
+export type Bucket = {
+    id: number,
+    name: string
+}
 
 
 const BucketList = () => {
@@ -10,8 +15,7 @@ const BucketList = () => {
     const [showForm, setShowForm] = useState(false)
 
     return (
-        <div>
-            <div>
+            {/* <div>
                 {showForm ? (
                     <NewBucket />
                 ) : (
@@ -19,8 +23,7 @@ const BucketList = () => {
                        + Add new bucket
                     </button>
                 )}
-            </div>
-        </div>
+            </div> */}
     )
 }
 

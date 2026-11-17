@@ -2,7 +2,7 @@
 
 import { useState, useEffect, ChangeEvent } from "react"
 import { createGoal } from "../actions/goals"
-import type { Bucket } from "../services/buckets"
+import type { Bucket } from "./BucketList"
 
 const NewGoal = ({ onClose, buckets }: {
     onClose: () => void
@@ -59,13 +59,15 @@ const NewGoal = ({ onClose, buckets }: {
                             width={200} height={200} />}
                     </label>
                 </div>
-                <button type="submit" className="border">
-                    Create
-                </button>
+                <div className="flex gap-4">
+                    <button type="submit" className="border">
+                        Create
+                    </button>
 
-                <button onClick={() => onClose()}>
-                    Cancel
-                </button>
+                    <button className="border" onClick={() => onClose()}>
+                        Cancel
+                    </button>
+                </div>
             </form>
         </div>
     )

@@ -6,7 +6,7 @@ import { useState } from "react";
 const MotivationCard = () => {
 
     return(
-        <div className="flex flex-row px-5 py-15 gap-4 bg-[#9c745f] text-white">
+        <div className="flex flex-col items-center text-center justify-center px-5 py-15 gap-4 bg-[#9c745f] text-white">
             <p>What's stopping you?</p>
         </div>
     )

@@ -1,10 +1,18 @@
 import { neon } from "@neondatabase/serverless"
-import type { Goal } from "../components/GoalList"
+// import type { Goal } from "../components/GoalList"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/auth"
 import { error } from "console"
 
 const sql = neon(process.env.DATABASE_URL!)
+
+export type Goal = {
+    id: number,
+    content: string,
+    category: string,
+    image_url: string,
+    created_at: string
+}
 
 const goals = [
     { id: 1, content: 'Visit Japan', url: '/images/japan.jpg' },
