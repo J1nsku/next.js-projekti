@@ -12,6 +12,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { redirect } from "next/navigation";
 import TopPriorityButton from "./TopPriorityButton";
+import CompletedButton from "./CompletedButton";
 
 export default async function HomeContent() {
     await connection()
@@ -55,9 +56,10 @@ export default async function HomeContent() {
                                         width={200}
                                         height={200}
                                     />
-                                    <div className="flex flex-row">
-                                    <TopPriorityButton id={goal.id} is_top_priority={goal.is_top_priority}/>
-                                    <h2> {goal.content} </h2>
+                                    <div className="flex flex-row items-center gap-1">
+                                        <TopPriorityButton id={goal.id} is_top_priority={goal.is_top_priority} />
+                                        <h2> {goal.content} </h2>
+                                        <CompletedButton id={goal.id} is_completed={goal.is_completed} />
                                     </div>
                                     <h3 className="bg-green-100 text-green-950 rounded-full"> {goal.category} </h3>
                                     {new Date(goal.created_at).toLocaleDateString("en-US", {

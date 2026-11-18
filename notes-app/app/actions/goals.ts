@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
-import { addGoal, toggleImportance, toggleTopPriority } from "../services/goals"
+import { addGoal, toggleCompleted, toggleImportance, toggleTopPriority } from "../services/goals"
 import { uploadImage } from "../lib/storage"
 
 export const createGoal = async (formData: FormData) => {
@@ -21,6 +21,12 @@ export const createGoal = async (formData: FormData) => {
     revalidatePath("/")
     redirect("/")
 
+}
+
+export const toggleCompletedAction = async (id: number, is_completed: boolean) => {
+    toggleCompleted(id, is_completed)
+
+    revalidatePath("/")
 }
 
 export const toggleTopPriorityAction = async (id: number, is_top_priority: boolean) => {

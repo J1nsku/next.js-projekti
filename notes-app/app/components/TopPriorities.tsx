@@ -12,8 +12,14 @@ const TopPriorities = ({ goals }: { goals: Goal[] }) => {
             <p className="self-start px-4 py-1 w-fit mb-4 text-2sm bg-[#DED9D7] rounded-xl"> Top Priorities </p>
             <div>
                 {goals.map(goal => (
-                    <div key={goal.id}>
-                        {goal.content}
+                    <div className="flex w-full justify-between" key={goal.id}>
+                        <span>{goal.content}</span>
+                        <span>{goal.target_date !== null && new Date(goal.target_date).toLocaleDateString("en-US", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                        })}
+                        </span>
                     </div>
                 ))}
             </div>

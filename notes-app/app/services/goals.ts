@@ -14,7 +14,8 @@ export type Goal = {
     image_url: string,
     created_at: string,
     target_date: string | null,
-    is_top_priority: boolean
+    is_top_priority: boolean,
+    is_completed: boolean
 }
 
 const goals = [
@@ -89,6 +90,34 @@ export const getGoalById = (id: number) => {
 
 export const toggleImportance = async (id: number) => {
     const goal = goals.find((goal) => goal.id === id)
+}
+
+export const toggleCompleted = async (id: number, is_completed: boolean) => {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.email) {
+        throw new Error("Not authenticated")
+    }
+
+    const users = await sql`
+    SELECT id FROM users
+    WHERE email = ${session.user.email}
+    `
+
+    const userId = users[0]?.id
+
+    if (!userId) {
+        throw new Error("User not found")
+    }
+
+    await sql`
+    UPDATE goals
+    SET is_completed = ${is_completed}
+    WHERE id = ${id}
+    AND user_id = ${userId}
+    `
+
+    revalidatePath("/")
 }
 
 export const toggleTopPriority = async (id: number, is_top_priority: boolean) => {
