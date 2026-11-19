@@ -19,7 +19,7 @@ const QuickActions = ({ buckets }: { buckets: Bucket[] }) => {
 
     return (
         <div className="flex flex-col border rounded-lg p-4 gap-4">
-            <h1 className="font-bold text-lg text-[#9c745f] border-b border-[#000000]">Quick Actions</h1>
+            <h1 className="font-bold text-lg text-[#9c745f] border-b border-[#D9D9D9]">Quick Actions</h1>
 
             <div className="flex flex-col gap-4">
                 {showBucketForm ? (

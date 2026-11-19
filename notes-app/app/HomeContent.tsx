@@ -13,6 +13,7 @@ import { authOptions } from "@/auth";
 import { redirect } from "next/navigation";
 import TopPriorityButton from "./TopPriorityButton";
 import CompletedButton from "./CompletedButton";
+import InspirationCard from "./components/InspirationCard";
 
 export default async function HomeContent() {
     await connection()
@@ -49,10 +50,10 @@ export default async function HomeContent() {
 
                         <div className="grid grid-cols-3 gap-4">
                             {goals.map(goal => (
-                                <div key={goal.id} className="flex flex-col border border-[#bdbdbd] rounded-lg bg-[#ffffff]">
+                                <div key={goal.id} className="flex flex-col border border-[#D9D9D9] rounded-lg bg-[#ffffff]">
                                     <div className="relative">
-                                        <img className={`goal ${goal.is_completed ? "grayscale" : ""} rounded-t-lg border-t border-t-[#bdbdbd] 
-                                            border-l border-l-[#bdbdbd] border-r border-r-[#bdbdbd]`}
+                                        <img className={`goal ${goal.is_completed ? "grayscale" : ""} rounded-t-lg border-t border-t-[#D9D9D9] 
+                                            border-l border-l-[#bdbdbd] border-r border-r-[#D9D9D9]`}
                                             src={goal.image_url} alt={goal.content}
                                             width={200}
                                             height={200}
@@ -89,6 +90,7 @@ export default async function HomeContent() {
                     />
 
                     <LifeStats goals={goals} />
+                    <InspirationCard />
                 </div>
             </div>
         </div>

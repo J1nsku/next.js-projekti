@@ -8,7 +8,7 @@ const TopPriorities = ({ goals }: { goals: Goal[] }) => {
 
     return (
         <div className="flex flex-col border rounded-lg p-4 gap-4">
-            <h1 className="font-bold text-lg text-[#9c745f] border-b border-[#000000]"> Top Priorities This Year </h1>
+            <h1 className="font-bold text-lg text-[#9c745f] border-b border-[#D9D9D9]"> Top Priorities This Year </h1>
             <p className="self-start px-4 py-1 w-fit mb-4 text-2sm bg-[#DED9D7] rounded-xl"> Top Priorities </p>
             <div>
                 {goals.map(goal => (

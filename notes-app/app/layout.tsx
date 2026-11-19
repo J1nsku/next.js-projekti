@@ -1,6 +1,7 @@
 import Link from "next/link";
 import './globals.css';
 import { Caveat } from "next/font/google";
+import { Shantell_Sans } from "next/font/google";
 
 const caveat = Caveat({
   weight: '400',
@@ -15,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={caveat.variable}>
+      <body className={`${caveat.variable}`}>
         <nav>
           <Link href="/">Home</Link>
           {" | "}
@@ -23,14 +24,14 @@ export default function RootLayout({
           {" | "}
           <Link href="/goals/new">Create new</Link>
           {" | "} */}
-           <Link href="/login">Login</Link>
-           {" | "}
-           <Link href="/register">Register</Link>
-           {" | "}
-           <Link href="/logout">Log out</Link>
+          <Link href="/login">Login</Link>
+          {" | "}
+          <Link href="/register">Register</Link>
+          {" | "}
+          <Link href="/logout">Log out</Link>
         </nav>
         {children}
       </body>
-    </html>
+    </html >
   );
 }
