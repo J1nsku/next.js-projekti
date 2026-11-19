@@ -50,23 +50,30 @@ export default async function HomeContent() {
                         <div className="grid grid-cols-3 gap-4">
                             {goals.map(goal => (
                                 <div key={goal.id} className="flex flex-col border border-[#bdbdbd] rounded-lg bg-[#ffffff]">
-                                    <img className="rounded-t-lg border-t border-t-[#bdbdbd] 
-                                            border-l border-l-[#bdbdbd] border-r border-r-[#bdbdbd]"
-                                        src={goal.image_url} alt={goal.content}
-                                        width={200}
-                                        height={200}
-                                    />
-                                    <div className="flex flex-row items-center gap-1">
-                                        <TopPriorityButton id={goal.id} is_top_priority={goal.is_top_priority} />
-                                        <h2> {goal.content} </h2>
-                                        <CompletedButton id={goal.id} is_completed={goal.is_completed} />
+                                    <div className="relative">
+                                        <img className={`goal ${goal.is_completed ? "grayscale" : ""} rounded-t-lg border-t border-t-[#bdbdbd] 
+                                            border-l border-l-[#bdbdbd] border-r border-r-[#bdbdbd]`}
+                                            src={goal.image_url} alt={goal.content}
+                                            width={200}
+                                            height={200}
+                                        />
+                                        {goal.is_completed && <span className="absolute top-2 right-2 px-2 py-1 text-xs
+                                       text-[#808080] bg-[#ffffff] rounded-xl">DONE</span>}
                                     </div>
-                                    <h3 className="bg-green-100 text-green-950 rounded-full"> {goal.category} </h3>
-                                    {new Date(goal.created_at).toLocaleDateString("en-US", {
-                                        month: "long",
-                                        day: "numeric",
-                                        year: "numeric",
-                                    })}
+
+                                    <div className="p-3">
+                                        <div className="flex flex-row items-center gap-1">
+                                            <TopPriorityButton id={goal.id} is_top_priority={goal.is_top_priority} />
+                                            <h2 className={`goal ${goal.is_completed ? "line-through text-[#808080]" : ""}`}> {goal.content} </h2>
+                                            <CompletedButton id={goal.id} is_completed={goal.is_completed} />
+                                        </div>
+                                        <h3 className="self-start text-xs font-bold px-2 py-0.5 w-fit text-2sm bg-[#B0D1D4] text-[#47595C] rounded-lg"> {goal.category} </h3>
+                                        {new Date(goal.created_at).toLocaleDateString("en-US", {
+                                            month: "long",
+                                            day: "numeric",
+                                            year: "numeric",
+                                        })}
+                                    </div>
                                     {/* <Link href={`/goals/${goal.id}`}> {goal.dream} </Link> */}
                                 </div>
                             ))}
@@ -81,7 +88,7 @@ export default async function HomeContent() {
                         height={250}
                     />
 
-                    <LifeStats />
+                    <LifeStats goals={goals} />
                 </div>
             </div>
         </div>
