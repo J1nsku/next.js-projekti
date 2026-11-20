@@ -1,7 +1,6 @@
 import Link from "next/link";
 import './globals.css';
 import { Caveat } from "next/font/google";
-import { Shantell_Sans } from "next/font/google";
 
 const caveat = Caveat({
   weight: '400',

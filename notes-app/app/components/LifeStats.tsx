@@ -13,7 +13,7 @@ const LifeStats = ({ goals }: { goals: Goal[] }) => {
 
     return (
         <div>
-            <div className="flex flex-col border rounded-lg p-4 gap-4">
+            <div className="flex flex-col border border-[#D9D9D9] rounded-lg p-4 gap-4">
                 <h1 className="font-bold m-0 text-lg text-[#9c745f] border-b border-[#D9D9D9]"> Life Stats </h1>
                 <div className="pl-0 font-normal text-left">
                     <button className="w-full text-left mb-2"

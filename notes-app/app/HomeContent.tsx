@@ -14,6 +14,7 @@ import { redirect } from "next/navigation";
 import TopPriorityButton from "./TopPriorityButton";
 import CompletedButton from "./CompletedButton";
 import InspirationCard from "./components/InspirationCard";
+import NewGoalButton from "./components/NewGoalButton";
 
 export default async function HomeContent() {
     await connection()
@@ -46,7 +47,10 @@ export default async function HomeContent() {
                 <div className="flex flex-col gap-4">
 
                     <div className="px-5 py-15 items-center bg-[#efebe9] rounded-xl">
+                        <div className="flex flex-row">
                         <p className="self-start px-4 py-1 w-fit mb-4 text-2sm bg-[#DED9D7] rounded-xl"> Dreams </p>
+                        <NewGoalButton buckets={buckets} />
+                        </div>
 
                         <div className="grid grid-cols-3 gap-4">
                             {goals.map(goal => (
@@ -64,10 +68,12 @@ export default async function HomeContent() {
 
                                     <div className="p-3">
                                         <div className="flex flex-row items-center gap-1">
-                                            <TopPriorityButton id={goal.id} is_top_priority={goal.is_top_priority} />
                                             <h2 className={`goal ${goal.is_completed ? "line-through text-[#808080]" : ""}`}> {goal.content} </h2>
-                                            <CompletedButton id={goal.id} is_completed={goal.is_completed} />
                                         </div>
+                                            <div className="flex items-center justify-center gap-3">
+                                                <TopPriorityButton id={goal.id} is_top_priority={goal.is_top_priority} />
+                                                <CompletedButton id={goal.id} is_completed={goal.is_completed} />
+                                            </div>
                                         <h3 className="self-start text-xs font-bold px-2 py-0.5 w-fit text-2sm bg-[#B0D1D4] text-[#47595C] rounded-lg"> {goal.category} </h3>
                                         {new Date(goal.created_at).toLocaleDateString("en-US", {
                                             month: "long",

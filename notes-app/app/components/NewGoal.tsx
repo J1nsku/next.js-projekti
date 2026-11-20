@@ -27,14 +27,14 @@ const NewGoal = ({ onClose, buckets }: {
             <h2> Create new goal </h2>
             <form action={createGoal}>
                 <div>
-                    <label className="border">
+                    <label className="border border-[#D9D9D9]">
                         What do you want to achieve?
                         <input type="text" id="content" name="content" required
                             placeholder="Visit Japan, read 20 books..." />
                     </label>
                 </div>
                 <div>
-                    <label htmlFor="category" className="border">
+                    <label htmlFor="category" className="border border-[#D9D9D9]">
                         Bucket
                         <select name="category" id="category">
                             {buckets.map((bucket) => (
@@ -54,7 +54,7 @@ const NewGoal = ({ onClose, buckets }: {
                     </label>
                 </div>
                 <div>
-                    <label className="border">
+                    <label className="border border-[#D9D9D9]">
                         Target Date
                         <input type="date"
                             name="target_date"
@@ -63,7 +63,7 @@ const NewGoal = ({ onClose, buckets }: {
                     </label>
                 </div>
                 <div>
-                    <label className="border">
+                    <label className="border border-[#D9D9D9]">
                         Picture
                         <input type="file"
                             name="image"
@@ -74,11 +74,11 @@ const NewGoal = ({ onClose, buckets }: {
                     </label>
                 </div>
                 <div className="flex gap-4">
-                    <button type="submit" className="border">
+                    <button type="submit" className="border border-[#D9D9D9]">
                         Create
                     </button>
 
-                    <button className="border" onClick={() => onClose()}>
+                    <button className="border border-[#D9D9D9]" onClick={() => onClose()}>
                         Cancel
                     </button>
                 </div>

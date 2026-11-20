@@ -12,15 +12,15 @@ const NewBucket = ({ onClose }: {
                 <div>
                     <label>
                         Bucket name:
-                        <input className="border" type="text" name="content" required />
+                        <input className="border border-[#9c745f]" type="text" name="content" required />
                     </label>
                 </div>
                 <div className="flex gap-4">
-                    <button type="submit" className="border">
+                    <button type="submit" className="border border-[#9c745f]">
                         Create
                     </button>
 
-                    <button className="border" onClick={() => onClose()}>
+                    <button className="border border-[#9c745f]" onClick={() => onClose()}>
                         Cancel
                     </button>
                 </div>
