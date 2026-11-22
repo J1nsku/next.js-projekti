@@ -84,8 +84,31 @@ export const addGoal = async (content: string, category: string, image_url: stri
 }
 // goals.push({ id: nextId++, content, url })
 
-export const getGoalById = (id: number) => {
-    return goals.find((goal) => goal.id === id)
+export const getGoalById = async (id: number): Promise<Goal | undefined> => {
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user?.email) {
+        throw new Error("Not authenticated")
+    }
+
+    const users = await sql`
+        SELECT id FROM users
+        WHERE email = ${session.user.email}
+    `;
+
+    const userId = users[0]?.id;
+
+    if (!userId) {
+        throw new Error("User not found");
+    }
+
+    const result = await sql`
+        SELECT * FROM goals
+        WHERE id = ${id}
+        AND user_id = ${userId}
+    `;
+
+    return result[0] as Goal | undefined;
 }
 
 export const toggleImportance = async (id: number) => {

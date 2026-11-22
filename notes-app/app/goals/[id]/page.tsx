@@ -5,7 +5,7 @@ import { toggleGoalImportance } from "../../actions/goals";
 const GoalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params
 
-    const goal = getGoalById(Number(id))
+    const goal = await getGoalById(Number(id))
 
     if (!goal) {
         notFound()
@@ -14,7 +14,7 @@ const GoalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     return (
         <div>
             <h2>{goal.content}</h2>
-            <p>{goal.url}</p>
+            <p>{goal.image_url}</p>
             <form action={toggleGoalImportance}>
                 <input type="hidden" name="id" value={goal.id} />
                 <button type="submit">
