@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { getGoals } from "../services/goals"
+import { Suspense } from "react"
 
-export default async function Goals() {
+const GoalsContent = async () => {
     const goals = await getGoals()
     return (
         <div>
@@ -21,3 +22,11 @@ export default async function Goals() {
         </div>
     )
 }
+
+const Goals = ({ params }: { params: Promise<{ id: string }> }) => {
+    <Suspense fallback={<p>Ladataan tavoitetta...</p>}>
+        <GoalsContent />
+    </Suspense>
+}
+
+export default Goals

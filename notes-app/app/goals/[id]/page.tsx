@@ -1,9 +1,9 @@
-export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation";
 import { getGoalById } from "../../services/goals"
 import { toggleGoalImportance } from "../../actions/goals";
+import { Suspense } from "react";
 
-const GoalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+const GoalContent = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params
 
     const goal = await getGoalById(Number(id))
@@ -24,6 +24,12 @@ const GoalPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             </form>
         </div>
     )
+}
+
+const GoalPage = ({ params }: { params: Promise<{ id: string }> })  => {
+    <Suspense fallback={<p>Ladataan tavoitetta...</p>}>
+        <GoalContent params={params} />
+    </Suspense>
 }
 
 export default GoalPage
