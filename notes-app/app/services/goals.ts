@@ -29,7 +29,10 @@ export const getGoals = async (): Promise<Goal[]> => {
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) {
-        throw new Error("Not authenticated")
+        const demoGoals = await sql`
+     SELECT * FROM goals WHERE is_demo = true
+    `
+        return demoGoals as Goal[]
     }
 
     const users = await sql`
@@ -43,7 +46,7 @@ export const getGoals = async (): Promise<Goal[]> => {
         throw new Error("User not found")
     }
 
-    const goals = await sql`SELECT * FROM goals WHERE user_id = ${userId} ORDER BY created_at ASC`
+    const goals = await sql`SELECT * FROM goals WHERE user_id = ${userId} AND is_demo = false ORDER BY created_at ASC`
     return goals as Goal[]
 }
 

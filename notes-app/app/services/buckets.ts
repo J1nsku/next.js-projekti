@@ -22,7 +22,15 @@ export const getBuckets = async () => {
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) {
-        return [];
+        const demoBuckets = await sql`
+        SELECT id, name
+    FROM buckets
+    WHERE id IN (
+    SELECT bucket_id
+    FROM goals
+    WHERE is_demo = true
+    )`
+        return demoBuckets as Bucket[]
     }
 
     const users = await sql`
@@ -62,8 +70,6 @@ export const addBucket = async (name: string) => {
     if (!userId) {
         throw new Error("User not found")
     }
-
-
 
     buckets.push({ id: nextId++, name })
 }

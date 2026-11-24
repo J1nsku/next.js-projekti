@@ -21,9 +21,9 @@ export default async function HomeContent() {
 
     const session = await getServerSession(authOptions);
 
-    if (!session) {
-        redirect("/login");
-    }
+    // if (!session) {
+    //     redirect("/login");
+    // }
 
     const buckets = await getBuckets();
 
