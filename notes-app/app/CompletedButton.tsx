@@ -22,7 +22,7 @@ const CompletedButton = ({ id, is_completed }: { id: number, is_completed: boole
                     }
                 }}>
                 {isComplete ? true : false}
-                {isComplete && <span className="text-xs text-[#ffffff]">✓</span>}.bvg
+                {isComplete && <span className="text-xs text-[#ffffff]">✓</span>}
             </button>
         </div>
     )
