@@ -11,7 +11,7 @@ const TopPriorityButton = ({ id, is_top_priority }: { id: number, is_top_priorit
 
     return (
         <div>
-            <button title="Top Priority" className="flex text-2xl text-[#9a8065] items-center justify-center" type="button"
+            <button title="Top Priority" className="flex text-2xl text-[#9c745f] items-center justify-center" type="button"
                 onClick={() => {
                     if (session) {
                         toggleTopPriorityAction(id, !is_top_priority)

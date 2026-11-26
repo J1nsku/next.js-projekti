@@ -13,14 +13,14 @@ const NewGoalButton = ({ buckets }: {
     return (
         <div>
             <div>
-                <button className="flex items-center justify-center px-4 py-1 mb-4 text-2sm text-white bg-[#9a8065] rounded-xl" type="button" onClick={() => setOpenModal(!openModal)}>
+                <button className="flex cursor-pointer hover:bg-[#b08772] items-center justify-center px-4 py-1 mb-4 text-2sm text-white bg-[#9c745f] rounded-xl" type="button" onClick={() => setOpenModal(!openModal)}>
                     New
                 </button>
             </div>
             {openModal && (
                 <div className="flex items-center justify-center fixed inset-0 z-50">
-                    <div className="bg-white rounded-xl shadow-xl p-6">
-                        <div className="flex flex-row justify-between items-center text-2xl text-[#9a8065] font-bold">
+                    <div>
+                        <div className="flex flex-row justify-between items-center text-2xl text-[#9c745f] font-bold">
                             Create new goal
                             <button className="flex items-center justify-center" type="button" onClick={() => setOpenModal(false)}>
                                 X

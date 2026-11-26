@@ -33,7 +33,7 @@ export default async function HomeContent() {
         <div className="flex flex-col gap-4 w-full px-8">
 
             <h1 className="md:col-span-3 text-center font-(family-name:--font-caveat) 
-            text-5xl text-[#9c745f]"> Dashboard </h1>
+            text-[51px] text-[#9c745f] font-medium uppercase leading-none tracking-[0.13em] sm:text-[64px]"> Dashboard </h1>
 
             <div className="grid grid-cols-1 md:grid-cols-[2fr_5fr_2fr] gap-x-6">
 
@@ -46,21 +46,21 @@ export default async function HomeContent() {
 
                 <div className="flex flex-col gap-4">
 
-                    <div className="px-5 py-15 items-center bg-[#efebe9] rounded-xl">
-                        <div className="flex flex-row">
+                    <div className="px-5 pt-5 pb-15 items-center bg-[#efebe9] rounded-xl">
+                        <div className="flex flex-row justify-between items-center gap-4">
                         <p className="self-start px-4 py-1 w-fit mb-4 text-2sm bg-[#DED9D7] rounded-xl"> Dreams </p>
                         <NewGoalButton buckets={buckets} />
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid gap-4 sm:grid-cols-3">
                             {goals.map(goal => (
                                 <div key={goal.id} className="flex flex-col border border-[#D9D9D9] rounded-lg bg-[#ffffff]">
-                                    <div className="relative">
+                                    <div className="relative h-[130px] overflow-hidden">
                                         <img className={`goal ${goal.is_completed ? "grayscale" : ""} rounded-t-lg border-t border-t-[#D9D9D9] 
-                                            border-l border-l-[#bdbdbd] border-r border-r-[#D9D9D9]`}
+                                            border-l border-l-[#bdbdbd] border-r border-r-[#D9D9D9] h-full w-full object-cover transition duration-500 group-hover:scale-105 `}
                                             src={goal.image_url} alt={goal.content}
-                                            width={200}
-                                            height={200}
+                                            // width={200}
+                                            // height={200}
                                         />
                                         {goal.is_completed && <span className="absolute top-2 right-2 px-2 py-1 text-xs
                                        text-[#808080] bg-[#ffffff] rounded-xl">DONE</span>}
@@ -68,7 +68,7 @@ export default async function HomeContent() {
 
                                     <div className="p-3">
                                         <div className="flex flex-row items-center gap-1">
-                                            <h2 className={`goal ${goal.is_completed ? "line-through text-[#808080]" : ""}`}> {goal.content} </h2>
+                                            <h2 className={`goal ${goal.is_completed ? "line-through text-[#808080]" : ""} text-[16px] leading-tight`}> {goal.content} </h2>
                                         </div>
                                             <div className="flex items-center justify-center gap-3">
                                                 <TopPriorityButton id={goal.id} is_top_priority={goal.is_top_priority} />
@@ -86,7 +86,7 @@ export default async function HomeContent() {
                             ))}
                         </div>
                     </div>
-                    <TopPriorities goals={goals.filter((goal) => goal.is_top_priority === true)} />
+                    <TopPriorities goals={goals.filter((goal) => goal.is_top_priority === true)} buckets={buckets} />
                 </div>
 
                 <div className="flex flex-col items-stretch mx-auto gap-4 w-full">
